@@ -1,5 +1,7 @@
 
 //This is the client
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.Random;
 import java.io.*;
 import java.net.*;
@@ -9,7 +11,7 @@ public class NetworkingTCP_Client {
 
     public static String createMsg(int input){
         StringBuilder msg = new StringBuilder("");
-        for (int i = 0; i < input/2; i++) {
+        for (int i = 0; i < input; i++) {    //might need to divide input by 2/
            msg.append('a');
         }
 
@@ -18,14 +20,19 @@ public class NetworkingTCP_Client {
     //int key = 0;
     public static String xor(String message){
         //XOR key
-        int key = 7;
+        String key = "abcdefh";
         // Define String to store encrypted/decrypted String
         String outputStr = "";
         int len = message.length();
         // perform XOR operation of key
         // with every character in string
+        int j =0;
         for (int i = 0; i < len; i++){
-           Character.toString((char)(message.charAt(i) ^ key));
+           Character.toString((char)(message.charAt(i) ^ key.charAt(j)));
+           j++;
+           if(j%8 == 0){
+               j = 0;
+           }
 
         }
 
@@ -33,26 +40,29 @@ public class NetworkingTCP_Client {
         return outputStr;
     }
 
-        public static void main(String[] args) throws IOException {
-
-            String hostName = "rho.cs.oswego.edu";
-
+        public static void main(String[] args) throws IOException, UnknownHostException,InterruptedException {
+            System.out.println("1");
+            InetAddress hostName = InetAddress.getByName("rho.cs.oswego.edu");
+            System.out.println("2");
 
             try (Socket echoSocket = new Socket(hostName, portNumber);
-                    PrintWriter out = new PrintWriter(echoSocket.getOutputStream(), true);
-                    BufferedReader in = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
+                    PrintWriter output = new PrintWriter(echoSocket.getOutputStream(), true);
+                    BufferedReader input = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
                     BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in))) {
+                System.out.println("3");
                 String userInput;
                 long nanoStartTime = System.nanoTime();
                 boolean sent = false;
+
                 while (sent != true) {
                     System.out.println("Specify the amount of bytes you'd like to send:");
                     userInput = stdIn.readLine();
                     //this is where I switch to bytes
-                    out.write(xor(createMsg(Integer.parseInt(userInput))));
+                    output.write(xor(createMsg(Integer.parseInt(userInput))));
                     //out sends out
-                    System.out.println(in.readLine());
+                    System.out.println(input.readLine());
                     sent = true;
+
                     //in receives from server
                 }
 
