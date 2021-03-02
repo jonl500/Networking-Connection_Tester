@@ -11,16 +11,20 @@ public class NetworkingTCP_Client {
 
     public static String createMsg(int input){
         StringBuilder msg = new StringBuilder("");
-        for (int i = 0; i < input; i++) {    //might need to divide input by 2/
+        for (int i = 0; i < input/2; i++) {    //might need to divide input by 2/
            msg.append('a');
         }
 
        return msg.toString();
     }
+
+    //make an arraylist of strinfs for the required sizes and just flush the entire array list through all once
+
     //int key = 0;
     public static String xor(String message){
         //XOR key
         String key = "abcdefh";
+        StringBuilder blid = new StringBuilder();
         // Define String to store encrypted/decrypted String
         String outputStr = "";
         int len = message.length();
@@ -28,7 +32,7 @@ public class NetworkingTCP_Client {
         // with every character in string
         int j =0;
         for (int i = 0; i < len; i++){
-           Character.toString((char)(message.charAt(i) ^ key.charAt(j)));
+           blid.append((char)(message.charAt(i) ^ key.charAt(j)));
            j++;
            if(j%8 == 0){
                j = 0;
@@ -36,13 +40,13 @@ public class NetworkingTCP_Client {
 
         }
 
-        System.out.println(outputStr);
+        System.out.println(blid.toString());
         return outputStr;
     }
 
         public static void main(String[] args) throws IOException, UnknownHostException,InterruptedException {
             System.out.println("1");
-            InetAddress hostName = InetAddress.getByName("rho.cs.oswego.edu");
+            InetAddress hostName = InetAddress.getByName("pi.cs.oswego.edu");
             System.out.println("2");
 
             try (Socket echoSocket = new Socket(hostName, portNumber);
@@ -60,7 +64,7 @@ public class NetworkingTCP_Client {
                     //this is where I switch to bytes
                     output.write(xor(createMsg(Integer.parseInt(userInput))));
                     //out sends out
-                    System.out.println(input.readLine());
+                    System.out.println(xor(input.readLine()));
                     sent = true;
 
                     //in receives from server

@@ -14,16 +14,18 @@ public class ServerSide_TCP {
                 PrintWriter out = new PrintWriter(client.getOutputStream(), true);
                 BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
+
+
                 String cmd;
                 while ((cmd = in.readLine()) != null) {
 
-                    String reply = cmd;
-                    int len = reply.length();
+                    //String reply = cmd;
+                    int len = cmd.length();
 
 
                     out.println("Content-Length: " + len);
 
-                    out.println(reply);
+                    out.println(cmd);
                 }
                     out.close();
                     in.close();
