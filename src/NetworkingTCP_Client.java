@@ -11,7 +11,7 @@ public class NetworkingTCP_Client {
 
     public static String createMsg(int input){
         StringBuilder msg = new StringBuilder("");
-        for (int i = 0; i < input; i++) {    //might need to divide input by 2/
+        for (int i = 0; i < input/2; i++) {    //might need to divide input by 2/
            msg.append('a');
         }
 
