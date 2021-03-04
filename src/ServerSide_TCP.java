@@ -38,8 +38,8 @@ public class ServerSide_TCP {
                 PrintWriter out = new PrintWriter(client.getOutputStream(), true);
                 System.out.println("listening for input");
 
-                String cmd = "";
-                while ((cmd = xor(in.readLine())) != null) {
+                String cmd = in.readLine();
+                while (cmd != null) {
                     System.out.println("reading line");
                     //String reply = cmd;
                     int len = cmd.length();
