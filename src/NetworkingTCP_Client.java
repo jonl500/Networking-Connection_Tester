@@ -1,8 +1,8 @@
 
 //This is the client
-import org.w3c.dom.ls.LSOutput;
+//import org.w3c.dom.ls.LSOutput;
 
-import java.util.Random;
+import java.util.ArrayList;
 import java.io.*;
 import java.net.*;
 
@@ -11,14 +11,14 @@ public class NetworkingTCP_Client {
 
     public static String createMsg(int input){
         StringBuilder msg = new StringBuilder("");
-        for (int i = 0; i < input/2; i++) {    //might need to divide input by 2/
+        for (int i = 0; i < input; i++) {    //might need to divide input by 2/
            msg.append('a');
         }
 
        return msg.toString();
     }
 
-    //make an arraylist of strinfs for the required sizes and just flush the entire array list through all once
+    //make an arraylist of strings for the required sizes and just flush the entire array list through all once
 
     //int key = 0;
     public static String xor(String message){
@@ -32,7 +32,7 @@ public class NetworkingTCP_Client {
         // with every character in string
         int j =0;
         for (int i = 0; i < len; i++){
-           blid.append((char)(message.charAt(i) ^ key.charAt(j)));
+           blid.append((char)(message.charAt(i) ^ key.charAt(i%key.length())));
            j++;
            if(j%8 == 0){
                j = 0;
@@ -41,12 +41,12 @@ public class NetworkingTCP_Client {
         }
 
         System.out.println(blid.toString());
-        return outputStr;
+        return blid.toString();
     }
 
         public static void main(String[] args) throws IOException, UnknownHostException,InterruptedException {
             System.out.println("1");
-            InetAddress hostName = InetAddress.getByName("pi.cs.oswego.edu");
+            InetAddress hostName = InetAddress.getByName("rho.cs.oswego.edu");
             System.out.println("2");
 
             try (Socket echoSocket = new Socket(hostName, portNumber);
@@ -63,10 +63,11 @@ public class NetworkingTCP_Client {
                     userInput = stdIn.readLine();
                     //this is where I switch to bytes
                     output.write(xor(createMsg(Integer.parseInt(userInput))));
+                    System.out.println("Message sent");
                     //out sends out
                     System.out.println(xor(input.readLine()));
+                    System.out.println("message returned");
                     sent = true;
-
                     //in receives from server
                 }
 
