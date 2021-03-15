@@ -75,7 +75,7 @@ public class NetworkingTCP_Client {
                 long nanoEndTime = System.nanoTime();
                 long RTT = nanoEndTime - nanoStartTime;
                 echoSocket.close();
-                System.out.println(RTT);
+                System.out.println("RTT: " + RTT + " Nano seconds");
             } catch (UnknownHostException e) {
                 System.err.println("Don't know about host " + hostName);
                 System.exit(1);
