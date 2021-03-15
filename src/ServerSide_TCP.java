@@ -39,16 +39,17 @@ public class ServerSide_TCP {
                 System.out.println("listening for input");
 
                 String cmd = in.readLine();
-                //while (cmd != null) {
+
+                while (cmd != null) {
                     System.out.println("reading line");
                     //cmd = xor(cmd);
                     int len = cmd.length();
 
 
-                    out.println("Content-Length: " + len);
+                    //out.println("Content-Length: " + len);
 
-                    out.println(xor(cmd));
-                //}
+                    //out.println(xor(cmd));
+                }
                     out.close();
                     in.close();
                     client.close();

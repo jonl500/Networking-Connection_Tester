@@ -62,7 +62,7 @@ public class NetworkingTCP_Client {
                     System.out.println("Specify the amount of bytes you'd like to send:");
                     userInput = stdIn.readLine();
                     //this is where I switch to bytes
-                    output.write(xor(createMsg(Integer.parseInt(userInput))));
+                    output.write(xor(createMsg(Integer.parseInt(userInput))) + "\n");
                     System.out.println("Message sent");
                     //out sends out
                     System.out.println(xor(input.readLine()));
