@@ -65,6 +65,7 @@ public class NetworkingTCP_Client {
                     output.write(xor(createMsg(Integer.parseInt(userInput))) + "\n");
                     System.out.println("Message sent");
                     //out sends out
+                    output.flush();
                     System.out.println(xor(input.readLine()));
                     System.out.println("message returned");
                     sent = true;

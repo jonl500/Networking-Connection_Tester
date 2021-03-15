@@ -48,7 +48,8 @@ public class ServerSide_TCP {
 
                     //out.println("Content-Length: " + len);
 
-                    //out.println(xor(cmd));
+                    out.println(cmd);
+                    out.flush();
                 }
                     out.close();
                     in.close();
