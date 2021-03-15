@@ -40,7 +40,7 @@ public class ServerSide_TCP {
 
                 String cmd = in.readLine();
 
-                while (cmd != null) {
+                //while (cmd != null) {
                     System.out.println("reading line");
                     //cmd = xor(cmd);
                     int len = cmd.length();
@@ -50,7 +50,7 @@ public class ServerSide_TCP {
 
                     out.println(cmd);
                     out.flush();
-                }
+               // }
                     out.close();
                     in.close();
                     client.close();
