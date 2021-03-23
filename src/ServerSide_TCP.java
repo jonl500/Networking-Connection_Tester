@@ -42,7 +42,7 @@ public class ServerSide_TCP {
                 PrintWriter out = new PrintWriter(client.getOutputStream(), true);
                 System.out.println("listening for input");
                 boolean breaker = true;
-                while (breaker = true) {
+                while (breaker == true) {
                     String cmd = in.readLine();
                     if (packetCounter == 0) {
                         packets.add(cmd);
@@ -62,6 +62,7 @@ public class ServerSide_TCP {
                             out.println(packets.get(packetCounter));
                             out.flush();
                         }
+                        breaker = false;
                     }
                     int len = cmd.length();
                 }
