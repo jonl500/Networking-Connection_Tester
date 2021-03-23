@@ -57,10 +57,11 @@ public class NetworkingTCP_Client {
                 String userInput;
                 long nanoStartTime = System.nanoTime();
                 boolean sent = false;
-
+                int bitThrough = 0;
                 while (sent != true) {
                     System.out.println("Specify the amount of bytes you'd like to send:");
                     userInput = stdIn.readLine();
+                    bitThrough = Integer.parseInt(userInput);
                     //this is where I switch to bytes
                     output.write(xor(createMsg(Integer.parseInt(userInput))) + "\n");
                     System.out.println("Message sent");
@@ -76,6 +77,8 @@ public class NetworkingTCP_Client {
                 long RTT = nanoEndTime - nanoStartTime;
                 echoSocket.close();
                 System.out.println("RTT: " + RTT + " Nano seconds");
+                double throughput = ((bitThrough*8)/(RTT*10^9));
+                System.out.println("Throughput: " + throughput + " bps");
             } catch (UnknownHostException e) {
                 System.err.println("Don't know about host " + hostName);
                 System.exit(1);
