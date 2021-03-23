@@ -7,11 +7,11 @@ public class UDP_Server {
         // Step 1 : Create a socket to listen at port
         DatagramSocket socket = new DatagramSocket(2800);
         byte[] receive = new byte[65535];
-
+        System.out.println("beep");
         DatagramPacket packetReceived = null;
         boolean sent = false;
         while (sent != true) {
-
+            System.out.println("boop");
             // Step 2 : create a DatgramPacket to receive the data.
             packetReceived = new DatagramPacket(receive, receive.length);
 

@@ -35,7 +35,7 @@ public class UDP_Client {
 
         }
 
-        System.out.println(blid.toString());
+        //System.out.println(blid.toString());
         return blid.toString();
     }
 
