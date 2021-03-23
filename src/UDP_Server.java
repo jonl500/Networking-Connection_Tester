@@ -6,7 +6,7 @@ public class UDP_Server {
     public static void main(String[] args)  throws SocketException, UnknownHostException, IOException{
         // Step 1 : Create a socket to listen at port
         DatagramSocket socket = new DatagramSocket(2800);
-        byte[] receive = new byte[65535];
+        byte[] receive = new byte[1000000];
         System.out.println("beep");
         DatagramPacket packetReceived = null;
         boolean sent = false;
@@ -19,9 +19,11 @@ public class UDP_Server {
             socket.receive(packetReceived);
             System.out.println("message received");
             socket.send(packetReceived);
-            System.out.println("Client:-" + data(receive));
+            //System.out.println("Client:-" + data(receive));
 
 
+            // Clear the buffer after every message.
+            receive = new byte[100000];
             sent = true;
             // Exit the server if the client sends "bye"
 //            if (data(receive).toString().equals("bye"))
@@ -30,8 +32,6 @@ public class UDP_Server {
 //
 //            }
 
-            // Clear the buffer after every message.
-            receive = new byte[65535];
         }
     }
 
