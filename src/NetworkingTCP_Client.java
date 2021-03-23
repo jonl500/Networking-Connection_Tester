@@ -63,12 +63,18 @@ public class NetworkingTCP_Client {
                     userInput = stdIn.readLine();
                     bitThrough = createMsg(Integer.parseInt(userInput));
                     //this is where I switch to bytes
+                    for (int i = 0; i < 1024; i++) {
+
                     output.write(xor(createMsg(Integer.parseInt(userInput))) + "\n");
                     System.out.println("Message sent");
                     //out sends out
                     output.flush();
+                    }
+                    while (input.readLine() != null) {
+
                     System.out.println(xor(input.readLine()));
                     System.out.println("message returned");
+                    }
                     sent = true;
                     //in receives from server
                 }
