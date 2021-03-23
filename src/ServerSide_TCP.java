@@ -1,6 +1,7 @@
 
 import java.net.*;
 import java.io.*;
+import java.util.ArrayList;
 
 public class ServerSide_TCP {
     static final int portNumber = 2800;
@@ -29,6 +30,9 @@ public class ServerSide_TCP {
     }
     public static void main(String[] args) throws IOException {
         System.out.println("Server is open");
+        int packetCounter = 0;
+        int packetAmount = 1024;
+        ArrayList<String> packets = new ArrayList<String>();
         try {
             ServerSocket serverSocket = new ServerSocket(portNumber);
             System.out.println("port 2800 established");
@@ -39,9 +43,23 @@ public class ServerSide_TCP {
                 System.out.println("listening for input");
 
                 String cmd = in.readLine();
-
+                    if(packetCounter == 0){
+                        packets.add(cmd);
+                        packetCounter ++;
+                    }else if (packetCounter < packetAmount){
+                        packets.add(cmd);
+                        packetCounter ++;
+                    }
                 //while (cmd != null) {
                     System.out.println("reading line");
+                    if (packetCounter == packetAmount){
+                        packetCounter = 0;
+                        out.println(packets.get(packetCounter).substring(0,8));
+                        // ACK in 8 bytes!!!!!!
+                        for (packetCounter = 0;packetCounter < packetAmount; packetCounter++) {
+                            out.println(packets.get(packetCounter));
+                        }
+                    }
                     //cmd = xor(cmd);
                     int len = cmd.length();
 
