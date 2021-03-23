@@ -77,7 +77,7 @@ public class NetworkingTCP_Client {
                 long RTT = nanoEndTime - nanoStartTime;
                 echoSocket.close();
                 System.out.println("RTT: " + RTT + " Nano seconds");
-                double throughput = ((8*8)/(RTT*10^-9));
+                double throughput = ((bitThrough.length()*8)/(RTT*0.000000001));
                 System.out.println("Throughput: " + throughput + " bps");
             } catch (UnknownHostException e) {
                 System.err.println("Don't know about host " + hostName);
