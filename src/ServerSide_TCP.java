@@ -41,33 +41,38 @@ public class ServerSide_TCP {
                 BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
                 PrintWriter out = new PrintWriter(client.getOutputStream(), true);
                 System.out.println("listening for input");
-
-                String cmd = in.readLine();
-                    if(packetCounter == 0){
+                boolean breaker = true;
+                while (breaker = true) {
+                    String cmd = in.readLine();
+                    if (packetCounter == 0) {
                         packets.add(cmd);
-                        packetCounter ++;
-                    }else if (packetCounter < packetAmount){
+                        packetCounter++;
+                    } else if (packetCounter < packetAmount) {
                         packets.add(cmd);
-                        packetCounter ++;
+                        packetCounter++;
                     }
-                //while (cmd != null) {
+                    //while (cmd != null) {
                     System.out.println("reading line");
-                    if (packetCounter == packetAmount){
+                    if (packetCounter == packetAmount) {
                         packetCounter = 0;
-                        out.println(packets.get(packetCounter).substring(0,8));
+                        out.println(packets.get(packetCounter).substring(0, 8));
+                        out.flush();
                         // ACK in 8 bytes!!!!!!
-                        for (packetCounter = 0;packetCounter < packetAmount; packetCounter++) {
+                        for (packetCounter = 0; packetCounter < packetAmount; packetCounter++) {
                             out.println(packets.get(packetCounter));
+                            out.flush();
                         }
                     }
-                    //cmd = xor(cmd);
                     int len = cmd.length();
+                }
+                    //cmd = xor(cmd);
+
 
 
                     //out.println("Content-Length: " + len);
 
-                    out.println(cmd);
-                    out.flush();
+                 //   out.println(cmd);
+                   // out.flush();
                // }
                     out.close();
                     in.close();
