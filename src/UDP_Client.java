@@ -54,11 +54,14 @@ public class UDP_Client {
             packet = new DatagramPacket(sendBuffer, sendBuffer.length, host, 2800);
             nanoStartTime = System.nanoTime();
         socket.send(packet);
-        byte[] buffer = new byte[sendBuffer.length];
-            packet = new DatagramPacket(buffer, buffer.length, host, 2800);
-        socket.receive(packet);
+            System.out.println("sent");
+
             sent = true;
         }
+        byte[] buffer = new byte[sendBuffer.length];
+        packet = new DatagramPacket(buffer, buffer.length, host, 2800);
+        socket.receive(packet);
+        System.out.println("received");
         long nanoEndTime = System.nanoTime();
         long RTT = nanoEndTime - nanoStartTime;
         socket.close();

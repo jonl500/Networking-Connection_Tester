@@ -17,7 +17,7 @@ public class UDP_Server {
 
             // Step 3 : revieve the data in byte buffer.
             socket.receive(packetReceived);
-
+            System.out.println("message received");
             socket.send(packetReceived);
             System.out.println("Client:-" + data(receive));
 
