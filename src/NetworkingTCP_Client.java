@@ -70,9 +70,10 @@ public class NetworkingTCP_Client {
                     //out sends out
                     output.flush();
                     }
-                    while (input.readLine() != null) {
+                    String incoming;
+                    while ((incoming = input.readLine()) != null) {
 
-                    System.out.println(xor(input.readLine()));
+                    System.out.println(xor(incoming));
                     System.out.println("message returned");
                     }
                     sent = true;
