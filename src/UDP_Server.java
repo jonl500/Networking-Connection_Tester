@@ -15,7 +15,7 @@ public class UDP_Server {
             // Step 2 : create a DatgramPacket to receive the data.
             packetReceived = new DatagramPacket(receive, receive.length);
 
-            // Step 3 : revieve the data in byte buffer.
+            // Step 3 : receive the data in byte buffer.
             socket.receive(packetReceived);
             System.out.println("message received");
             socket.send(packetReceived);

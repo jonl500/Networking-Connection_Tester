@@ -48,20 +48,34 @@ public class UDP_Client {
         byte[] sendBuffer = null;
         boolean sent = false;
         long nanoStartTime = 0;
-        while (sent != true){
+
+        System.out.println("How many packets would you like to send:");
+        String packetNum = sc.nextLine();
+        System.out.println("how big should the packets be?");
         String input = sc.nextLine();
-        sendBuffer = xor(createMsg(Integer.parseInt(input))).getBytes();
-            packet = new DatagramPacket(sendBuffer, sendBuffer.length, host, 2800);
+        while (sent != true){
+
             nanoStartTime = System.nanoTime();
-        socket.send(packet);
-            System.out.println("sent");
+            for (int i = 0; i < Integer.parseInt(packetNum); i++) {
+                sendBuffer = xor(createMsg(Integer.parseInt(input))).getBytes();
+                packet = new DatagramPacket(sendBuffer, sendBuffer.length, host, 2800);
+
+                socket.send(packet);
+                System.out.println("sent");
+                byte[] buff = new byte[8];
+                DatagramPacket ack = new DatagramPacket(buff, 8, host, 2800);
+                socket.receive(ack);
+            }
 
             sent = true;
         }
-        byte[] buffer = new byte[sendBuffer.length];
-        packet = new DatagramPacket(buffer, buffer.length, host, 2800);
-        socket.receive(packet);
-        System.out.println("received");
+        for (int i = 0; i < Integer.parseInt(packetNum)*2; i++) {
+            byte[] buffer = new byte[sendBuffer.length];
+            packet = new DatagramPacket(buffer, buffer.length, host, 2800);
+            socket.receive(packet);
+            System.out.println("received");
+        }
+
         long nanoEndTime = System.nanoTime();
         long RTT = nanoEndTime - nanoStartTime;
         socket.close();
