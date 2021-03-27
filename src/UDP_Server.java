@@ -38,14 +38,14 @@ public class UDP_Server {
                     socket.send(ACK);
                     System.out.println("ACK sent.");
                     socket.send(packetReceived);
-
+                receive = new byte[Integer.parseInt(byteArraySize)];
             }
 
             //System.out.println("Client:-" + data(receive));
 
 
             // Clear the buffer after every message.
-            receive = new byte[Integer.parseInt(byteArraySize)];
+
             sent = true;
 
 

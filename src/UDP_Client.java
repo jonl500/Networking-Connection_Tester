@@ -65,16 +65,17 @@ public class UDP_Client {
                 byte[] buff = new byte[8];
                 DatagramPacket ack = new DatagramPacket(buff, 8, host, 2800);
                 socket.receive(ack);
+                byte[] buffer = new byte[sendBuffer.length];
+                packet = new DatagramPacket(buffer, buffer.length, host, 2800);
+                socket.receive(packet);
+                System.out.println("received");
             }
 
             sent = true;
         }
-        for (int i = 0; i < Integer.parseInt(packetNum); i++) {
-            byte[] buffer = new byte[sendBuffer.length];
-            packet = new DatagramPacket(buffer, buffer.length, host, 2800);
-            socket.receive(packet);
-            System.out.println("received");
-        }
+//        for (int i = 0; i < Integer.parseInt(packetNum); i++) {
+//
+//        }
 
         long nanoEndTime = System.nanoTime();
         long RTT = nanoEndTime - nanoStartTime;
