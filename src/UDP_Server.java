@@ -31,7 +31,7 @@ public class UDP_Server {
                 int port = packetReceived.getPort();
 
                 byte[] ack = new byte[8];
-                for (int j = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
                     ack[j] = packetReceived.getData()[j];
                 }
                     DatagramPacket ACK = new DatagramPacket(ack, 8, add, port);
