@@ -1,12 +1,17 @@
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class UDP_Server {
 
     public static void main(String[] args)  throws SocketException, UnknownHostException, IOException{
         // Step 1 : Create a socket to listen at port
         DatagramSocket socket = new DatagramSocket(2800);
-        byte[] receive = new byte[1000000];
+        System.out.println("How many bytes do want to receive?");
+        Scanner kb = new Scanner(System.in);
+        String byteArraySize = kb.nextLine();
+        byte[] receive = new byte[Integer.parseInt(byteArraySize)];
         System.out.println("beep");
         DatagramPacket packetReceived = null;
         boolean sent = false;
@@ -18,19 +23,21 @@ public class UDP_Server {
             // Step 3 : receive the data in byte buffer.
             socket.receive(packetReceived);
             System.out.println("message received");
+            byte[] ack = new byte[8];
+            for (int i = 0; i < 8; i++) {
+                ack[i] = packetReceived.getData()[i];
+            }
+            DatagramPacket ACK = new DatagramPacket(ack, 8);
+            socket.send(ACK);
+            System.out.println("ACK sent.");
             socket.send(packetReceived);
             //System.out.println("Client:-" + data(receive));
 
 
             // Clear the buffer after every message.
-            receive = new byte[100000];
+            receive = new byte[Integer.parseInt(byteArraySize)];
             sent = true;
-            // Exit the server if the client sends "bye"
-//            if (data(receive).toString().equals("bye"))
-//            {
-//                System.out.println("Client sent bye.....EXITING");
-//
-//            }
+
 
         }
     }

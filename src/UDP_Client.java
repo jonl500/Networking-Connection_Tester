@@ -69,7 +69,7 @@ public class UDP_Client {
 
             sent = true;
         }
-        for (int i = 0; i < Integer.parseInt(packetNum)*2; i++) {
+        for (int i = 0; i < Integer.parseInt(packetNum); i++) {
             byte[] buffer = new byte[sendBuffer.length];
             packet = new DatagramPacket(buffer, buffer.length, host, 2800);
             socket.receive(packet);
