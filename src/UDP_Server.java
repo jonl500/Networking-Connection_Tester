@@ -25,23 +25,21 @@ public class UDP_Server {
                 // Step 3 : receive the data in byte buffer.
                 socket.receive(packetReceived);
                 System.out.println("message received");
-            }
-            System.out.println("Sending ack");
+                System.out.println("Sending ack");
 
-            InetAddress add = packetReceived.getAddress();
-            int port = packetReceived.getPort();
+                InetAddress add = packetReceived.getAddress();
+                int port = packetReceived.getPort();
 
-            byte[] ack = new byte[8];
-            for (int i = 0; i < 8; i++) {
-                ack[i] = packetReceived.getData()[i];
-            }
-            for (int i = 0; i < Integer.parseInt(packetNum); i++) {
-                DatagramPacket ACK = new DatagramPacket(ack, 8, add, port);
-                socket.send(ACK);
-                System.out.println("ACK sent.");
-                socket.send(packetReceived);
-            }
+                byte[] ack = new byte[8];
+                for (int j = 0; i < 8; i++) {
+                    ack[j] = packetReceived.getData()[j];
+                }
+                    DatagramPacket ACK = new DatagramPacket(ack, 8, add, port);
+                    socket.send(ACK);
+                    System.out.println("ACK sent.");
+                    socket.send(packetReceived);
 
+            }
 
             //System.out.println("Client:-" + data(receive));
 
