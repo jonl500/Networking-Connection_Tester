@@ -46,7 +46,7 @@ public class NetworkingTCP_Client {
 
         public static void main(String[] args) throws IOException, UnknownHostException,InterruptedException {
             System.out.println("1");
-            InetAddress hostName = InetAddress.getByName("rho.cs.oswego.edu");
+            InetAddress hostName = InetAddress.getByName("pi.cs.oswego.edu");
             System.out.println("2");
 
             try (Socket echoSocket = new Socket(hostName, portNumber);
@@ -59,11 +59,13 @@ public class NetworkingTCP_Client {
                 boolean sent = false;
                 String bitThrough ="";
                 while (sent != true) {
+                    System.out.println("Specify how many packets you'd like to send: ");
+                    String packetCount = stdIn.readLine();
                     System.out.println("Specify the amount of bytes you'd like to send:");
                     userInput = stdIn.readLine();
                     bitThrough = createMsg(Integer.parseInt(userInput));
                     //this is where I switch to bytes
-                    for (int i = 0; i < 1024; i++) {
+                    for (int i = 0; i < Integer.parseInt(packetCount); i++) {
 
                     output.write(xor(createMsg(Integer.parseInt(userInput))) + "\n");
                     System.out.println("Message sent");

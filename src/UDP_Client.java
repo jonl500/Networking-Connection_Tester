@@ -41,7 +41,7 @@ public class UDP_Client {
 
     public static void main(String[] args) throws SocketException, UnknownHostException, IOException {
 
-        InetAddress host = InetAddress.getByName("rho.cs.oswego.edu");
+        InetAddress host = InetAddress.getByName("pi.cs.oswego.edu");
         DatagramSocket socket = new DatagramSocket();
         DatagramPacket packet;
         Scanner sc = new Scanner(System.in);

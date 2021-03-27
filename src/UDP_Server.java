@@ -22,12 +22,14 @@ public class UDP_Server {
 
             // Step 3 : receive the data in byte buffer.
             socket.receive(packetReceived);
+            InetAddress add = packetReceived.getAddress();
+            int port = packetReceived.getPort();
             System.out.println("message received");
             byte[] ack = new byte[8];
             for (int i = 0; i < 8; i++) {
                 ack[i] = packetReceived.getData()[i];
             }
-            DatagramPacket ACK = new DatagramPacket(ack, 8);
+            DatagramPacket ACK = new DatagramPacket(ack, 8, add, port);
             socket.send(ACK);
             System.out.println("ACK sent.");
             socket.send(packetReceived);
