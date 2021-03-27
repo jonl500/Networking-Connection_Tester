@@ -11,6 +11,8 @@ public class UDP_Server {
         System.out.println("How many bytes do want to receive?");
         Scanner kb = new Scanner(System.in);
         String byteArraySize = kb.nextLine();
+        System.out.println("how many packets are there?");
+        String packetNum = kb.nextLine();
         byte[] receive = new byte[Integer.parseInt(byteArraySize)];
         System.out.println("beep");
         DatagramPacket packetReceived = null;
@@ -18,10 +20,12 @@ public class UDP_Server {
         while (sent != true) {
             System.out.println("boop");
             // Step 2 : create a DatgramPacket to receive the data.
-            packetReceived = new DatagramPacket(receive, receive.length);
+            for (int i = 0; i < Integer.parseInt(packetNum) ; i++) {
+                packetReceived = new DatagramPacket(receive, receive.length);
+                // Step 3 : receive the data in byte buffer.
+                socket.receive(packetReceived);
+            }
 
-            // Step 3 : receive the data in byte buffer.
-            socket.receive(packetReceived);
             InetAddress add = packetReceived.getAddress();
             int port = packetReceived.getPort();
             System.out.println("message received");
@@ -29,10 +33,14 @@ public class UDP_Server {
             for (int i = 0; i < 8; i++) {
                 ack[i] = packetReceived.getData()[i];
             }
-            DatagramPacket ACK = new DatagramPacket(ack, 8, add, port);
-            socket.send(ACK);
-            System.out.println("ACK sent.");
-            socket.send(packetReceived);
+            for (int i = 0; i < Integer.parseInt(packetNum); i++) {
+                DatagramPacket ACK = new DatagramPacket(ack, 8, add, port);
+                socket.send(ACK);
+                System.out.println("ACK sent.");
+                socket.send(packetReceived);
+            }
+
+
             //System.out.println("Client:-" + data(receive));
 
 
