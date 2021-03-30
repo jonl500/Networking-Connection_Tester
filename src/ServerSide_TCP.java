@@ -2,6 +2,7 @@
 import java.net.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ServerSide_TCP {
     static final int portNumber = 2800;
@@ -30,8 +31,10 @@ public class ServerSide_TCP {
     }
     public static void main(String[] args) throws IOException {
         System.out.println("Server is open");
+        System.out.println("How many packet do you want to recieve?");
         int packetCounter = 0;
-        int packetAmount = 1024;
+        Scanner scanner = new Scanner(System.in);
+        int packetAmount = scanner.nextInt();
         ArrayList<String> packets = new ArrayList<String>();
         try {
             ServerSocket serverSocket = new ServerSocket(portNumber);
