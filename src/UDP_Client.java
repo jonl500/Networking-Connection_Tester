@@ -68,7 +68,7 @@ public class UDP_Client {
                 byte[] buffer = new byte[sendBuffer.length];
                 packet = new DatagramPacket(buffer, buffer.length, host, 2800);
                 socket.receive(packet);
-                System.out.println("received");
+                System.out.println("received" + i);
             }
 
             sent = true;

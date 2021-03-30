@@ -73,10 +73,12 @@ public class NetworkingTCP_Client {
                     output.flush();
                     }
                     String incoming;
+                    int j = 0;
                     while ((incoming = input.readLine()) != null) {
 
                     //System.out.println(xor(incoming));
-                    System.out.println("message returned");
+                    System.out.println("message returned " + j);
+                    j++;
                     }
                     sent = true;
                     //in receives from server
