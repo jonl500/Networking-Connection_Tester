@@ -41,8 +41,9 @@ public class UDP_Client {
 
     public static void main(String[] args) throws SocketException, UnknownHostException, IOException {
         Scanner kb = new Scanner(System.in);
-        String serverName = kb.nextLine();
         System.out.println("insert name of server followed by a '.' as such: 'pi.' for altair use empty str.");
+        String serverName = kb.nextLine();
+
         InetAddress host = InetAddress.getByName(serverName + "cs.oswego.edu");
         DatagramSocket socket = new DatagramSocket();
         DatagramPacket packet;

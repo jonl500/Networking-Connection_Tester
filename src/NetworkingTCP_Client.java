@@ -48,8 +48,8 @@ public class NetworkingTCP_Client {
         public static void main(String[] args) throws IOException, UnknownHostException,InterruptedException {
             System.out.println("1");
             Scanner sc = new Scanner(System.in);
-            String serverName = sc.nextLine();
             System.out.println("insert name of server followed by a '.' as such: 'pi.' for altair use empty str.");
+            String serverName = sc.nextLine();
             InetAddress hostName = InetAddress.getByName(serverName + "cs.oswego.edu");
             System.out.println("2");
 
