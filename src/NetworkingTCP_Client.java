@@ -2,7 +2,7 @@
 //This is the client
 //import org.w3c.dom.ls.LSOutput;
 
-import java.util.ArrayList;
+
 import java.io.*;
 import java.net.*;
 
