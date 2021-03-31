@@ -5,6 +5,7 @@
 
 import java.io.*;
 import java.net.*;
+import java.util.Scanner;
 
 public class NetworkingTCP_Client {
     static final  int portNumber = 2800;
@@ -46,7 +47,10 @@ public class NetworkingTCP_Client {
 
         public static void main(String[] args) throws IOException, UnknownHostException,InterruptedException {
             System.out.println("1");
-            InetAddress hostName = InetAddress.getByName("pi.cs.oswego.edu");
+            Scanner sc = new Scanner(System.in);
+            String serverName = sc.nextLine();
+            System.out.println("insert name of server followed by a '.' as such: 'pi.' for altair use empty str.");
+            InetAddress hostName = InetAddress.getByName(serverName + "cs.oswego.edu");
             System.out.println("2");
 
             try (Socket echoSocket = new Socket(hostName, portNumber);
